@@ -52,7 +52,6 @@ func NewTimer(interval time.Duration) *Timer {
 	tm := &Timer{
 		msg: make(chan typeAction),
 	}
-
 	tm.interval.Set(interval)
 
 	return tm
@@ -66,7 +65,6 @@ func (tm *Timer) Start(keephouse func()) {
 	if tm.running {
 		return
 	}
-
 	tm.running = true
 
 	go tm.run(keephouse)
@@ -77,8 +75,8 @@ func (tm *Timer) run(keephouse func()) {
 
 	for {
 		var ch <-chan time.Time
-		interval := tm.interval.Get()
 
+		interval := tm.interval.Get()
 		if interval > 0 {
 			timer = time.NewTimer(interval)
 			ch = timer.C

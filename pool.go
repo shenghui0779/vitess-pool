@@ -105,7 +105,6 @@ func NewResourcePool(factory Factory, capacity, maxCap int, idleTimeout time.Dur
 				}
 
 				r, err := rp.Get(ctx)
-
 				if err != nil {
 					return
 				}
@@ -208,10 +207,8 @@ func (rp *ResourcePool) Get(ctx context.Context) (resource Resource, err error) 
 	// Unwrap
 	if wrapper.resource == nil {
 		wrapper.resource, err = rp.factory()
-
 		if err != nil {
 			rp.resources <- resourceWrapper{}
-
 			return nil, err
 		}
 
